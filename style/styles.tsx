@@ -1,10 +1,12 @@
+import { screenHeight, screenWidth } from "@/utils/Constants"
+
 const styles = {
   container: {
     flex: 1,
     justifyContent : "center" as "center",
     alignItems : "center" as "center",
     backgroundColor: "yellow",
-    width: 400,
+    width: screenWidth,
   },
   inputBar: {
     borderWidth: 4,

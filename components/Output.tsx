@@ -60,7 +60,6 @@ const Output = ({ data }: { data: meaning[] | null }) => {
                 ) : (
                   <Text>No Synonyms Found</Text>
                 )}
-                {syns.current == 0 ? <Text>No Synonyms Found</Text> : null}
                 <Text style={styles.text.subHeading}>Antonyms : </Text>
                 {antonyms.length > 0 ? (
                   antonyms.map((antonym) => {

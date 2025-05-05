@@ -5,15 +5,20 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 import Output from "@/components/Output";
+import { screenWidth } from "@/utils/Constants";
+import { Button } from "@react-navigation/elements";
 
 export default function Index() {
 
   const [input, setInput] = useState("");
   const [output, setOutput] = useState<any>("");
+  const [showOutput, setShowOutput] = useState<boolean>(false)
   
   const timeoutRef = useRef<number | null>(null)
   
   useEffect(() => {
+    setShowOutput(false)
+    setOutput("")
     handleTimeout()
   }, [input])
 
@@ -40,14 +45,19 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.container}>
-    
+      <Text style={{...styles.text.heading, textAlign: "left", marginTop : 15, width: screenWidth, paddingLeft : 10}}>Enter Word Here...</Text>
       <TextInput
         style={styles.inputBar}
         placeholder="Input Word"
         onChange={e => setInput(e.nativeEvent.text)}
-      /><ScrollView>
-      {(output != "" && !output.err)?<Output data={output}/>:
-      (output.err)? <Text>NO Meaning available</Text> :null}
+        onSubmitEditing={() => setShowOutput(true)}
+      />
+      <Button onTouchStart={() => {setShowOutput(true)}} style={{ width : 150}}>Search</Button>
+      <Text style={{...styles.text.heading, textAlign: "left", width: screenWidth, paddingLeft : 10}}>Meaning...</Text>
+      
+      <ScrollView>
+      {(output != "" && !output.err && showOutput)?<Output data={output}/>:
+      (output.err && showOutput)? <Text>NO Meaning available</Text> :null}
     </ScrollView>
     </SafeAreaView>
   );
