@@ -1,3 +1,5 @@
+// This Component Generates the Meaning Cards categoried under parts of speech
+
 import styles from "@/style/styles"
 import { meaning } from "@/types/types"
 import {

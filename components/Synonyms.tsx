@@ -1,9 +1,9 @@
+// This Component Generates the Synonym Card
+
+
 import styles from "@/style/styles"
 import { meaning } from "@/types/types"
 import {
-  InputFieldColor,
-  meanBorderColor,
-  meanTextColor,
   screenWidth,
 } from "@/utils/Constants"
 import Ionicons from "@expo/vector-icons/Ionicons"
@@ -61,14 +61,14 @@ const Synonyms = ({ data }: { data: meaning[] | null }) => {
               {synonyms.map((syn) => {
                 syns.current = syns.current + 1
                 return (
-                  <Text key={syns.current}>
+                  <Text key={syns.current} style={{...styles.text.subHeading}}>
                     {syns.current}. {syn}
                   </Text>
                 )
               })}
             </>
           ) : 
-          <Text> No Synonyms Found </Text>}
+          <Text style={{...styles.text.subHeading}}> No Synonyms Found </Text>}
         </View>
       ) : null}
     </View>

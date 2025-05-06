@@ -2,25 +2,21 @@ import styles from "@/style/styles"
 import { useEffect, useState, useRef } from "react"
 import { Platform, Text, View } from "react-native"
 import { ScrollView, TextInput } from "react-native-gesture-handler"
-import { SafeAreaView } from "react-native-safe-area-context"
 import axios from "axios"
 import Output from "@/components/Output"
 import {
   backgroundColor,
-  buttonColor,
-  screenHeight,
-  screenWidth,
   transitionColor,
 } from "@/utils/Constants"
 import { Button } from "@react-navigation/elements"
 
 export default function Index() {
-  const [input, setInput] = useState("")
-  const [output, setOutput] = useState<any>("")
-  const [showOutput, setShowOutput] = useState<boolean>(false)
+  const [input, setInput] = useState("") // stores value in TextInput
+  const [output, setOutput] = useState<any>("") // stores the data recieved from backend
+  const [showOutput, setShowOutput] = useState<boolean>(false) // As data is fetched asynchronously from user's search request, this keeps track if user wants to see the result
+  const [loading, setLoading] = useState<boolean>(true) // is true when data is being fetched
 
-  const [loading, setLoading] = useState<boolean>(true)
-  const timeoutRef = useRef<number | null>(null)
+  const timeoutRef = useRef<number | null>(null) // used in handleTimeout
 
   useEffect(() => {
     setShowOutput(false)
@@ -29,6 +25,11 @@ export default function Index() {
     handleTimeout()
   }, [input])
 
+  useEffect(() => {
+    setLoading(false)
+  }, [output])
+
+  // handleTimeout => it will call the API if the input field has not been updated for 1 sec, this helps in faster search time
   function handleTimeout() {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
@@ -36,7 +37,7 @@ export default function Index() {
     timeoutRef.current = setTimeout(callBackend, 1000)
     return
   }
-
+  // callBackend => used to make the GET request from backend API
   async function callBackend() {
     if (input == "") return
     try {
@@ -47,7 +48,6 @@ export default function Index() {
       setOutput(
         data[0].meanings ? data[0].meanings : { err: "No Meaning found" }
       )
-      setLoading(false)
     } catch (e: any) {
       if (e?.response?.status === 404) {
         setOutput({ err: "Term not found" })
@@ -80,17 +80,7 @@ export default function Index() {
           Enter Word Here...
         </Text>
         <TextInput
-          style={{
-            ...styles.inputBar,
-            height: "25%",
-            padding: 10,
-            borderColor: "white",
-            borderWidth: 2,
-            borderRadius: 15,
-            borderStyle: "dashed",
-            fontSize: 20,
-            justifyContent: "center",
-          }}
+          style={styles.inputBar}
           placeholder="Input Word"
           onChange={(e) => setInput(e.nativeEvent.text)}
           onSubmitEditing={() => setShowOutput(true)}
@@ -105,28 +95,19 @@ export default function Index() {
               setShowOutput(true)
             }}
             color="white"
-            style={{
-              width: 150,
-              backgroundColor: buttonColor,
-            }}
+            style={styles.button}
           >
             Search
           </Button>
         </View>
       </View>
       <ScrollView>
+        {(loading && showOutput)?<Text style={styles.text.error}>Loading...</Text>:null}
         {output != "" && !output.err && showOutput ? (
-          !loading ? (
             <Output data={output} />
-          ) : <Text>Loading...</Text>
         ) : output.err && showOutput ? (
           <Text
-            style={{
-              fontSize: 40,
-              marginTop: 10,
-              textAlign: "center",
-              fontWeight: "bold",
-            }}
+            style={styles.text.error}
           >
             {output.err}
           </Text>

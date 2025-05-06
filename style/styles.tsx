@@ -1,4 +1,6 @@
-import { InputFieldColor } from "@/utils/Constants"
+// used to store common CSS styles
+
+import { buttonColor, InputFieldColor } from "@/utils/Constants"
 
 const styles = {
   container: {
@@ -8,17 +10,29 @@ const styles = {
     justifyContent : 'space-around' as 'space-around'
   },
   inputBar: {
-    backgroundColor : InputFieldColor
+    backgroundColor : InputFieldColor,
+    padding: 10,
+    borderColor: "white",
+    borderWidth: 2,
+    borderRadius: 15,
+    borderStyle: "dashed" as "dashed",
+    fontSize: 20,
+    justifyContent: "center" as "center",
   },
   tabIcons: {},
   header: {},
   text: {
+    error : {
+      fontSize: 40,
+      marginTop: 10,
+      textAlign: "center" as "center",
+      fontWeight: "bold" as "bold",
+    },
     heading: {
       fontSize : 30,
       fontWeight : "bold" as "bold"
     },
     para: {
-
       paddingLeft : 15
     },
     subHeading: {
@@ -26,11 +40,9 @@ const styles = {
       fontSize : 20,
     },
   },
-  dropdown : {
-    
-  },
   button : {
-
+      width: 150,
+      backgroundColor: buttonColor
   }
 }
 

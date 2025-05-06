@@ -1,9 +1,9 @@
+// This Component Generates the Antonym Card
+
+
 import styles from "@/style/styles"
 import { meaning } from "@/types/types"
 import {
-  InputFieldColor,
-  meanBorderColor,
-  meanTextColor,
   screenWidth,
 } from "@/utils/Constants"
 import Ionicons from "@expo/vector-icons/Ionicons"
@@ -62,14 +62,14 @@ const Antonyms = ({ data }: { data: meaning[] | null }) => {
               {antonyms.map((ant) => {
                 ants.current = ants.current + 1
                 return (
-                  <Text key={ants.current}>
+                  <Text key={ants.current} style={{...styles.text.subHeading}}>
                     {ants.current}. {ant}
                   </Text>
                 )
               })}
             </>
           ) : 
-          <Text> No Antonyms Found </Text>}
+          <Text style={{...styles.text.subHeading}}> No Antonyms Found </Text>}
         </View>
       ) : null}
     </View>

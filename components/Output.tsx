@@ -1,3 +1,5 @@
+// This Component Renders the Output in the index file
+
 import { meaning } from "@/types/types"
 import { useRef } from "react"
 import { View, Text } from "react-native"

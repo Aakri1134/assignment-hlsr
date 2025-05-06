@@ -1,3 +1,5 @@
+// used to export commonly used types
+
 export interface meaning {
     //const { partOfSpeech, definitions, synonyms, antonyms } : {partOfSpeech : }= meaning,
     partOfSpeech : String,
