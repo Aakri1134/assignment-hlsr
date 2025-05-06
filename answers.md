@@ -3,7 +3,7 @@ I'd use AI coding/design assistants to ship front-end features faster without sa
 For example, 
 I’d use ChatGPT or GitHub Copilot or Claude to make React components like modals or cards using frameworks like Tailwind, saving hours on repetitive codes. 
 
-To ensure reliability, I’d auto-generate unit tests using AI with tools like Testing Library, covering edge cases that might be missed in a rush.
+To ensure reliability, I’d auto-generate unit tests using AI with tools like Claude, covering edge cases that might be missed in a rush.
 
 For designing , I could use Figma-to-code tools (like Locofy or Anima) to turn designs into responsive React code, speeding up UI implementation.
 
