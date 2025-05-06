@@ -10,7 +10,7 @@ export default function RootLayout() {
           options={{
             title : "Dictionary",
             headerShadowVisible : true,
-            headerLargeTitle : true
+            headerLargeTitle : true,
           }}
         />
       </Stack>

@@ -1,35 +1,32 @@
-import { screenHeight, screenWidth } from "@/utils/Constants"
+import { InputFieldColor, screenHeight, screenWidth } from "@/utils/Constants"
 
 const styles = {
   container: {
-    flex: 1,
-    justifyContent : "center" as "center",
-    alignItems : "center" as "center",
-    backgroundColor: "yellow",
-    width: screenWidth,
+    flex : 1,
+    flexDirection : 'column' as "column",
+    gap : 5,
+    justifyContent : 'space-around' as 'space-around'
   },
   inputBar: {
-    borderWidth: 4,
-    marginTop: 20,
-    borderColor: "black",
-    width: 350,
-    borderRadius: 20,
-    paddingLeft: 20,
-    marginBottom : 10
+    backgroundColor : InputFieldColor
   },
   tabIcons: {},
   header: {},
   text: {
     heading: {
-      fontSize: 20,
-      fontWeight: "bold" as "bold",
+      fontSize : 30,
+      fontWeight : "bold" as "bold"
     },
     para: {},
     subHeading: {
-      fontSize: 15,
-      fontWeight: "500" as "400",
     },
   },
+  dropdown : {
+    
+  },
+  button : {
+
+  }
 }
 
 export default styles
