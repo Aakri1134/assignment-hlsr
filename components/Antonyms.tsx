@@ -7,24 +7,32 @@ import {
   screenWidth,
 } from "@/utils/Constants"
 import Ionicons from "@expo/vector-icons/Ionicons"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 
-const Card = ({ partOfSpeech, definitions, synonyms, antonyms }: meaning) => {
-  const means = useRef<number>(0)
 
+const Antonyms = ({ data }: { data: meaning[] | null }) => {
   const [isExpanded, setIsExpanded] = useState<Boolean>(false)
+  const [antonyms, setAntonyms] = useState<String[]>([])
+  const ants = useRef<number>(0)
 
-  means.current = 0
+  useEffect(() => {
+    if (data != null)
+      data.map((meaning: meaning) => {
+        setAntonyms((x) => [...x, ...meaning.antonyms])
+      })
+  }, [data])
+
+  useEffect(() => {
+    ants.current = 0
+  }, [isExpanded])
+
   return (
     <View
       style={{
-        backgroundColor: InputFieldColor,
         padding: 10,
         width: screenWidth - 20,
-        borderWidth: 2,
-        borderColor: meanBorderColor,
-        borderStyle : 'dashed'
+        alignItems : 'center',
       }}
     >
       <TouchableOpacity
@@ -37,8 +45,10 @@ const Card = ({ partOfSpeech, definitions, synonyms, antonyms }: meaning) => {
           color="black"
           style={{ transform: [{ rotate: isExpanded ? "90deg" : "0deg" }] }}
         />
-        <Text style={{ ...styles.text.heading, color: meanTextColor }}>
-          {partOfSpeech.toUpperCase()}
+        <Text
+          style={{ ...styles.text.heading, fontSize: 40, textAlign: "center" }}
+        >
+          Antonyms
         </Text>
       </TouchableOpacity>
       {isExpanded ? (
@@ -47,20 +57,22 @@ const Card = ({ partOfSpeech, definitions, synonyms, antonyms }: meaning) => {
             paddingLeft: 10,
           }}
         >
-          {definitions.map((definition) => {
-            means.current = means.current + 1
-            return (
-              <View key={means.current}>
-                <Text style={styles.text.subHeading}>
-                  Meaning {means.current} :
-                </Text>
-                <Text style={styles.text.para}>{definition.definition}</Text>
-              </View>
-            )
-          })}
+          {antonyms.length > 0 ? (
+            <>
+              {antonyms.map((ant) => {
+                ants.current = ants.current + 1
+                return (
+                  <Text key={ants.current}>
+                    {ants.current}. {ant}
+                  </Text>
+                )
+              })}
+            </>
+          ) : 
+          <Text> No Antonyms Found </Text>}
         </View>
       ) : null}
     </View>
   )
 }
-export default Card
+export default Antonyms

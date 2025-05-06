@@ -1,4 +1,4 @@
-import { InputFieldColor, screenHeight, screenWidth } from "@/utils/Constants"
+import { InputFieldColor } from "@/utils/Constants"
 
 const styles = {
   container: {
@@ -17,8 +17,13 @@ const styles = {
       fontSize : 30,
       fontWeight : "bold" as "bold"
     },
-    para: {},
+    para: {
+
+      paddingLeft : 15
+    },
     subHeading: {
+      fontWeight : '600' as '600',
+      fontSize : 20,
     },
   },
   dropdown : {

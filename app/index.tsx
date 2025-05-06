@@ -45,10 +45,12 @@ export default function Index() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View
         style = {{
-          height : 250,
+          height : "30%",
+          minHeight : 250,
+          maxHeight : 350,
           backgroundColor : backgroundColor,
           flexDirection : 'column',
           justifyContent : 'space-around',
@@ -70,6 +72,8 @@ export default function Index() {
             borderWidth : 2,
             borderRadius : 15,
             borderStyle : 'dashed',
+            fontSize : 20,
+            justifyContent : 'center'
           }}
           placeholder="Input Word"
           onChange={(e) => setInput(e.nativeEvent.text)}
@@ -101,6 +105,6 @@ export default function Index() {
           <Text>NO Meaning available</Text>
         ) : null}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }

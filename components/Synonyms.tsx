@@ -7,24 +7,31 @@ import {
   screenWidth,
 } from "@/utils/Constants"
 import Ionicons from "@expo/vector-icons/Ionicons"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 
-const Card = ({ partOfSpeech, definitions, synonyms, antonyms }: meaning) => {
-  const means = useRef<number>(0)
-
+const Synonyms = ({ data }: { data: meaning[] | null }) => {
   const [isExpanded, setIsExpanded] = useState<Boolean>(false)
+  const [synonyms, setSynonyms] = useState<String[]>([])
+  const syns = useRef<number>(0)
 
-  means.current = 0
+  useEffect(() => {
+    if (data != null)
+      data.map((meaning: meaning) => {
+        setSynonyms((x) => [...x, ...meaning.synonyms])
+      })
+  }, [data])
+
+  useEffect(() => {
+    syns.current = 0
+  }, [isExpanded])
+
   return (
     <View
       style={{
-        backgroundColor: InputFieldColor,
         padding: 10,
         width: screenWidth - 20,
-        borderWidth: 2,
-        borderColor: meanBorderColor,
-        borderStyle : 'dashed'
+        alignItems: "center",
       }}
     >
       <TouchableOpacity
@@ -37,8 +44,10 @@ const Card = ({ partOfSpeech, definitions, synonyms, antonyms }: meaning) => {
           color="black"
           style={{ transform: [{ rotate: isExpanded ? "90deg" : "0deg" }] }}
         />
-        <Text style={{ ...styles.text.heading, color: meanTextColor }}>
-          {partOfSpeech.toUpperCase()}
+        <Text
+          style={{ ...styles.text.heading, fontSize: 40, textAlign: "center" }}
+        >
+          Synonyms
         </Text>
       </TouchableOpacity>
       {isExpanded ? (
@@ -47,20 +56,22 @@ const Card = ({ partOfSpeech, definitions, synonyms, antonyms }: meaning) => {
             paddingLeft: 10,
           }}
         >
-          {definitions.map((definition) => {
-            means.current = means.current + 1
-            return (
-              <View key={means.current}>
-                <Text style={styles.text.subHeading}>
-                  Meaning {means.current} :
-                </Text>
-                <Text style={styles.text.para}>{definition.definition}</Text>
-              </View>
-            )
-          })}
+          {synonyms.length > 0 ? (
+            <>
+              {synonyms.map((syn) => {
+                syns.current = syns.current + 1
+                return (
+                  <Text key={syns.current}>
+                    {syns.current}. {syn}
+                  </Text>
+                )
+              })}
+            </>
+          ) : 
+          <Text> No Synonyms Found </Text>}
         </View>
       ) : null}
     </View>
   )
 }
-export default Card
+export default Synonyms
