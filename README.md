@@ -1,4 +1,5 @@
 # Setup and Run Instructions
+After cloning the repository locally, follow the following steps,
 
 1. Install dependencies
 
@@ -18,5 +19,5 @@ The time spent on coding functionalities was minimum as most of them were fairly
 For better performance, I also integrated certain features for lesser wait time on actual searching.
 
 ## Future Plans
-Originally, I also had plans on making suggestions based on previous searches from the user.
-Also generating a history for previous searches and feature to bookmark searches to save into vocabulary
+I plan on making suggestions based on previous searches from the user.
+Also features like generating a history of previous searches and feature to bookmark searches could also a possibility.
